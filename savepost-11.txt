@@ -1,0 +1,55 @@
+# Save Post
+# <b>5. Emulate++ </b> Emulate premium behavior. Earn automatic save post by hitting radio stand ups.
+
+## Colors ##
+
+# Colors used; for ease of find and replace
+# Sonic Radio-Top triggered; light blue: rgb(0,96,122)
+# Sonic Radio-Bottom triggered; purple: rgb(73,0,122)
+# Save post qualified; amber: rgb(122, 40, 0)
+
+
+## Variables ##
+
+# Sonic Radio-Top - Has been triggered?
+.var[3] = 0
+
+# Sonic Radio-Bottom - Has been triggered?
+.var[4] = 0
+
+
+## Rules ##
+
+# Sonic Radio-Top - trigger
+# - Partial qualification for save post reward
+# - Set top range of LED strip to blue if top standup is activated
+# - Set entire LED strip to amber if both standups have been activated
+[ 8-sw-8 ] 8-sw-8 -> var[3] = 1; setrange(0,rgb(0,96,122),0,5); if (var[3] && var[4]) { setrange(0,rgb(122, 40, 0),0,10) }
+
+# Sonic Radio-Bottom - trigger
+# - Partial qualification for save post reward
+# - Set bottom range of LED strip to green if top standup is activated
+# - Set entire LED strip to amber if both standups have been activated
+[ 8-sw-9 ] 8-sw-9 -> var[4] = 1; setrange(0,rgb(73,0,122),5,5); if (var[3] && var[4]) { setrange(0,rgb(122, 40, 0),0,10) }
+
+# Outlane switch - trigger
+# (normally left outlane switch is 8-sw-17 but I'm using alternate switch ID of 1-sw-12 here instead; see config-0.txt for more details)
+# - Activates save post if save was earned by previously hitting both standups
+# - Changes LED strip to green, holds post up for 2 seconds, and then clears LED strip and standup reward qualification vars
+[ 1-sw-12 ] 1-sw-12 && var[3] && var[4] -> setrange(0,rgb(73,0,122),0,10); var[3] = 0; var[4] = 0; pulse(1,150); 40 ms; pulse(1,60); 2000 ms; pulse(1,0); setrange(0,rgb(0,0,0),0,10)
+
+# Shooter lane - trigger
+# - Award free save post qualification at start of new ball and after an overlord ball lock
+# - The 1 sec delay is to avoid detecting auto-shoot scenarios (e.g. ball save or multiball start)
+[ 8-sw-28 ] 8-sw-28 -> 1000 ms; if (8-sw-28) { var[3] = 1; var[4] = 1; setrange(0,rgb(122, 40, 0),0,10) }
+
+# Clear reward qualification during attract mode - interval trigger
+# - var[1] is defined in config-0.txt as: Attract mode (1) / Gameplay (0)
+[ 1000ms ] var[1] -> var[3] = 0; var[4] = 0; setrange(0,rgb(0,0,0),0,10)
+
+# Sync LED strip on/off state to general illumination state - interval trigger
+# - Lower playfield white GI bulbs: 8-lp-0
+# - If lower GI off, turn off LED strip
+# - If lower GI on, turn on LED strip (respecting current reward qualification state)
+[ 8-lp-0 ] !8-lp-0 -> setrange(0,rgb(0,0,0),0,10)
+[ 8-lp-0 ] 8-lp-0 -> if ( var[3] && var[4] ) { setrange(0,rgb(122, 40, 0),0,10) }; if (!var[3] && var[4]) { setrange(0,rgb(73,0,122),5,5) }; if (var[3] && !var[4]) { setrange(0,rgb(0,96,122),0,5) }

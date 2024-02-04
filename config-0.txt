@@ -1,0 +1,49 @@
+#Network
+.SSID="DMCS"
+.PASSWORD="UFFooFighters"
+
+##  DMCS v1.0 Board - Physical address line map
+# ┌─────────────────┐
+# |??             27|
+# |33             14|                12-pin center header
+# |25  [-12pin-]  15|         [?? ?? ?? ?? ?? ?? ?? 23 19 21 22 36]
+# |26             13|           1  2  3  4  5  6  7  8  9 10 11 12
+# |                 |
+# |PWM              |
+# |                 |
+# |  48v  RJ45  5v  |
+# └─────────────────┘
+##
+
+# Map for DMCS v1.0 board
+# Map logical channels to physical pins (e.g. channel 0 "&0" maps to physical pin 26)
+#.Map( &0 = 26, &1 = 23, &2 = 22, &4 = 21, &5 = 19, &3 = 36, &6 = 13 )
+.Map(&0 = 26, &2 = 22, &6 = 13)
+
+
+# Left outlane LED strip; channel 0; 10 LEDs
+.NeoPixel(0, 10)
+
+# UFO LEDs; channel 6; 19 LEDs
+.NeoPixel(6, 19)
+
+# Channel 2 here is an alligator clip on the left outlane switch.
+# The switch itself is disconnected from the Stern wiring harness.
+# I'm using using 1-sw-12 here (which is the un-used tournament button switch) as the "alias" for the Left Outlane switch
+# instead of the actual switch 8-sw-17. This is a workaround for an issue I've encountered with something causing any
+# DMCS rules with 8-sw-17 to fire sporatically (even when the switch is electrically disconnected from everything!).
+# See notes.md for more details. For purposes of writing rules, substitue 1-sw-12 anywhere the Left Outlane 8-sw-17
+# would have normally been used.
+.Input(2, 1-sw-12, 1, 0, 0, 3, 500, 0xfff0, 0xfff8)
+
+# Save Post
+.PWMChannel(1, 10000, 8)
+.PWM(5, 1)
+
+# Detect attract mode
+# Looks at the ball trough #6 switch 8-sw-32
+# If the ball through has been full for 20 seconds, probably in attract mode
+# Attract mode (1) / Gameplay (0)
+.var[1] = 1
+[ 1000 ms ] !var[1] && onfor( 20000 ms, 8-sw-32 ) -> var[1] = 1
+[ 1000 ms ] var[1] && offfor( 1000 ms, 8-sw-32 ) -> var[1] = 0
