@@ -2,22 +2,22 @@
 # <b>1. RGB Color Picker</b> Used to preview RGB colors. Use left inlane target (red), sonic radio top (blue), bottom (green) to increment color values by 10. Colors will rollover to 0 after 250. Use Right inlane target to clear all colors.
 
 # Red
-var[90] = 0
+var[10] = 0
 
 # Green
-var[91] = 0
+var[11] = 0
 
 # Blue
-var[92] = 0
+var[12] = 0
 
 # Left inlane target; increment red value
-[8-sw-21] 8-sw-21 -> var[90] = (var[90] + 10); if (var[90] > 250) { var[90] = 0 }; setrange(0,rgb(var[90],var[91],var[92]),0,10)
+[8-sw-21] 8-sw-21 -> var[10] = (var[10] + 10); if (var[10] > 250) { var[10] = 0 }; setrange(0,rgb(var[10],var[11],var[12]),0,10)
 
 # Sonic radio bottom; increment green value
-[8-sw-9] 8-sw-9 -> var[91] = (var[91] + 10); if (var[91] > 250) { var[91] = 0 }; setrange(0,rgb(var[90],var[91],var[92]),0,10)
+[8-sw-9] 8-sw-9 -> var[11] = (var[11] + 10); if (var[11] > 250) { var[11] = 0 }; setrange(0,rgb(var[10],var[11],var[12]),0,10)
 
 # Sonic radio top; increment green value
-[8-sw-8] 8-sw-8 -> var[92] = (var[92] + 10); if (var[92] > 250) { var[92] = 0 }; setrange(0,rgb(var[90],var[91],var[92]),0,10)
+[8-sw-8] 8-sw-8 -> var[12] = (var[12] + 10); if (var[12] > 250) { var[12] = 0 }; setrange(0,rgb(var[10],var[11],var[12]),0,10)
 
 # Right inlane target; clear RGB values
-[8-sw-22] 8-sw-22 -> var[90] = 0; var[91] = 0; var[92] = 0; setrange(0,rgb(var[90],var[91],var[92]),0,10)
+[8-sw-22] 8-sw-22 -> var[10] = 0; var[11] = 0; var[12] = 0; setrange(0,rgb(var[10],var[11],var[12]),0,10)
