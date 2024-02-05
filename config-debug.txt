@@ -1,0 +1,44 @@
+# Only for use with utility-02.txt to reproduce phantom switch error.
+
+#Network
+.SSID="DMCS"
+.PASSWORD="UFFooFighters"
+
+# Map logical channels to physical pins
+# Map for DMCS v0.92 board
+#.Map( &0 = 33, &1 = 15, &2 = 2, &4 = 4, &5 = 13, &3 = 12, &6 = 26 )
+
+# Map for DMCS v1.0 board
+.Map( &0 = 26, &1 = 23, &2 = 22, &4 = 21, &5 = 19, &3 = 36, &6 = 13 )
+
+# Map for DMCS v2.0 board
+#.Map( &0 = 26, &1 = 19, &2 = 22, &3 = 23, &4 = 36, &5 = 39, &6 = 32 )
+
+# LED gauge
+.NeoPixel( 0, 10 )
+
+# UFO
+.NeoPixel( 6, 19 )
+
+# L. Flipper
+#.Input( 1, &1, 1, 1 )
+
+# L. Outlane
+.Input( 2, 8-sw-17, 1, 0, 0, 3, 500, 0xfff0, 0xfff8 )
+
+# UFO Switch
+#.Input( 3, 9-sw-15, 1, 0, 0, 3, 250, 0xfff8, 0xfffc )
+
+# Stand Ups
+#.Input( 4, 8-sw-8, 1, 0, 0, 2, 250, 0xfff0, 0xfff8 )
+#.Input( 5, 8-sw-9, 1, 0, 0, 2, 250, 0xfff0, 0xfff8 )
+
+# Save Post
+.PWMChannel(1, 10000, 8)
+.PWM(5, 1)
+
+# var[0] is ms since last switch
+# Attract/Game Mode
+.var[1] = 1
+[ 1000 ms ] !var[1] && onfor( 20000 ms, 8-sw-32 ) -> var[1] = 1
+[ 1000 ms ] var[1] && offfor( 1000 ms, 8-sw-32 ) -> var[1] = 0

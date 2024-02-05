@@ -1,0 +1,39 @@
+# Utilities
+# <b>2. Debug phantom switch</b> Used to debug the left outlane switch being fired even when electrically disconnected.
+
+# Reproduction steps:
+#   - Electrically disconnect the physical left outlane switch completely from the Stern wiring harness
+#   - Connect only the following to the DMCS board:
+#     - 48V & 12V
+#     - RJ45 to Stern node Network
+#     - UFO and time indicator LED strips
+#     - Save post solenoid
+#     - Do NOT connect the wiring harness to the 12-pin center connector
+#     - Confirm the left outlane switch is connected to NOTHING and the disconnected wires are taped over to avoid grounding out
+#     - Overwrite the config.txt and config-0.txt files with the included config-debug.txt configuration file
+#     - Reboot the DMCS board
+#     - Activate this rule
+#     - Activate the UFO 2 Progression Rule
+#     - Reboot the DMCS board
+#     - Play the game normally
+# Expected results:
+#   - No LEDs ever light up on the indicator strip
+# Actual results:
+#   - LEDs on the strip light up seemly at random during regular gameplay
+# Additional notes:
+#   - For me, this usually occurs around 1-5 times per standard 3 ball game
+#   - If my understanding is correct, this should be impossible because the switch is not electrically connected to anything
+#   - Usually seemed to occur when another switch was pressed; I saw this occur for left flipper button, lockdown bar button, and a couple of the bot standups
+#   - Also occurred when no switch activity was present; ball was slowly rolling in the middle of the playfield not touch anything
+
+
+# Number of red leds to light
+.var[5] = 0
+
+# Starting index of remaining leds to light blue
+.var[6] = 0
+
+# Each time this is fired add another red LED to the strip
+# Lets me count the number of times this fires per game even with the physical switch completely disconnected
+# This should NEVER fire because the switch is disconnected, but somehow it does multiple times per game!
+[ 8-sw-17 ] True -> if (8-sw-17) { var[5] = (var[5] + 1); var[6] = ( var[5] + 1); setrange(0,rgb(120,0,0),0,var[5]); setrange(0,rgb(0,0,120),var[6],10) }
