@@ -11,13 +11,13 @@ var[91] = 0
 var[92] = 0
 
 # Left inlane target; increment red value
-[8-sw-21] 8-sw-21 -> var[90] = var[90] + 10; if (var[90] > 250) { var[90] = 0 }; setrange(0,rgb(var[90],var[91],var[92]),0,10);
+[8-sw-21] 8-sw-21 -> var[90] = (var[90] + 10); if (var[90] > 250) { var[90] = 0 }; setrange(0,rgb(var[90],var[91],var[92]),0,10)
 
 # Sonic radio bottom; increment green value
-[8-sw-9] 8-sw-9 -> var[91] = var[91] + 10; if (var[91] > 250) { var[91] = 0 }; setrange(0,rgb(var[90],var[91],var[92]),0,10);
+[8-sw-9] 8-sw-9 -> var[91] = (var[91] + 10); if (var[91] > 250) { var[91] = 0 }; setrange(0,rgb(var[90],var[91],var[92]),0,10)
 
 # Sonic radio top; increment green value
-[8-sw-8] 8-sw-8 -> var[92] = var[92] + 10; if (var[92] > 250) { var[92] = 0 }; setrange(0,rgb(var[90],var[91],var[92]),0,10);
+[8-sw-8] 8-sw-8 -> var[92] = (var[92] + 10); if (var[92] > 250) { var[92] = 0 }; setrange(0,rgb(var[90],var[91],var[92]),0,10)
 
 # Right inlane target; clear RGB values
-[8-sw-22] 8-sw-22 -> var[92] = var[90] = 0; var[91] = 0; var[92] = 0; setrange(0,rgb(var[90],var[91],var[92]),0,10);
+[8-sw-22] 8-sw-22 -> var[90] = 0; var[91] = 0; var[92] = 0; setrange(0,rgb(var[90],var[91],var[92]),0,10)
