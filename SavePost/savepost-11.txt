@@ -1,5 +1,5 @@
 # Save Post
-# <b>5. Emulate++ </b> Emulate premium behavior. Earn automatic save post by hitting radio stand ups. Free save post on ball start. LED strip matches GI on/off state.
+# <b>11. Emulate++ </b> Emulate premium behavior. Earn automatic save post by hitting radio stand ups. Free save post on ball start. LED strip matches GI on/off state.
 
 ## Colors ##
 
