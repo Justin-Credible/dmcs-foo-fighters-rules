@@ -22,10 +22,12 @@
 #   - LEDs on the strip light up seemly at random during regular gameplay
 # Additional notes:
 #   - For me, this usually occurs around 1-5 times per standard 3 ball game
-#   - If my understanding is correct, this should be impossible because the switch is not electrically connected to anything
+#   - If my understanding is correct, this should be impossible because the physical switch is not electrically connected to anything
 #   - Usually seemed to occur when another switch was pressed; I saw this occur for left flipper button, lockdown bar button, and a couple of the bot standups
 #   - Also occurred when no switch activity was present; ball was slowly rolling in the middle of the playfield not touch anything
-
+# Workaround:
+#   - Adjust config-0.txt Input mapping to use a switch that isn't used normally (I used the tournament start button)
+#   - See config-0.txt for the input mapping used as a workaround
 
 # Number of red leds to light
 .var[5] = 0

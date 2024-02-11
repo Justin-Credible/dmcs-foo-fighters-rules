@@ -1,5 +1,5 @@
 # Utilities
-# <b>1. RGB Color Picker</b> Used to preview RGB colors. Use left inlane target (red), sonic radio top (blue), bottom (green) to increment color values by 10. Colors will rollover to 0 after 250. Use Right inlane target to clear all colors.
+# <b>1. RGB Color Picker</b> Used to preview RGB colors. Use left inlane target (red), sonic radio bottom (green), top (blue) to increment color values by 10. Colors will rollover to 0 after 250. Use Right inlane target to clear all colors.
 
 # Red
 var[10] = 0
