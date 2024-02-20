@@ -39,7 +39,7 @@
 # - Changes LED strip to green, holds post up for 2 seconds
 # - Clears standup qualification vars immediately (so that they can be re-activated during a multiball scenario)
 # - Resets LED strip based on potentially changed state of qualification variables
-[ 1-sw-12 ] 1-sw-12 && var[3] && var[4] -> var[3] = 0; var[4] = 0; setrange(0,rgb(0,60,0),0,10); pulse(1,150); 40 ms; pulse(1,60); 2000 ms; pulse(1,0); if ( var[3] && var[4] ) { setrange(0,rgb(50,10,0),0,10) }; if (!var[3] && var[4]) { setrange(0,rgb(60,60,20),5,5) }; if (var[3] && !var[4]) { setrange(0,rgb(60,0,0),0,5) }
+[ 1-sw-12 ] 1-sw-12 && var[3] && var[4] -> var[3] = 0; var[4] = 0; setrange(0,rgb(0,60,0),0,10); pulse(1,150); 40 ms; pulse(1,60); 2000 ms; pulse(1,0); if ( var[3] && var[4] ) { setrange(0,rgb(50,10,0),0,10) } else { setrange(0,rgb(0,0,0),0,10) }; if (!var[3] && var[4]) { setrange(0,rgb(60,60,20),5,5) }; if (var[3] && !var[4]) { setrange(0,rgb(60,0,0),0,5) }
 
 # Shooter lane - trigger
 # - Award free save post qualification at start of new ball and after an overlord ball lock
