@@ -54,5 +54,4 @@
 # - Lower playfield white GI bulbs: 8-lp-0
 # - If lower GI off, turn off LED strip
 # - If lower GI on, turn on LED strip (respecting current reward qualification state)
-[ 8-lp-0 ] !8-lp-0 -> setrange(0,rgb(0,0,0),0,10)
-[ 8-lp-0 ] 8-lp-0 -> if ( var[3] && var[4] ) { setrange(0,rgb(50,10,0),0,10) }; if (!var[3] && var[4]) { setrange(0,rgb(60,60,20),5,5) }; if (var[3] && !var[4]) { setrange(0,rgb(60,0,0),0,5) }
+[ 8-lp-0 ] True -> if (8-lp-0) { if ( var[3] && var[4] ) { setrange(0,rgb(50,10,0),0,10) }; if (!var[3] && var[4]) { setrange(0,rgb(60,60,20),5,5) }; if (var[3] && !var[4]) { setrange(0,rgb(60,0,0),0,5) } } else { setrange(0,rgb(0,0,0),0,10) }
