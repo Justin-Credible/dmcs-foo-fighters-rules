@@ -27,13 +27,8 @@
 .NeoPixel(6, 19)
 
 # Channel 2 here is an alligator clip on the left outlane switch.
-# The switch itself is disconnected from the Stern wiring harness.
-# I'm using using 1-sw-12 here (which is the un-used tournament button switch) as the "alias" for the Left Outlane switch
-# instead of the actual switch 8-sw-17. This is a workaround for an issue I've encountered with something causing any
-# DMCS rules with 8-sw-17 to fire sporatically (even when the switch is electrically disconnected from everything!).
-# See phamtom-switch.md for more details. For purposes of writing rules, substitue 1-sw-12 anywhere the original Left Outlane 
-# 8-sw-17 would have normally been used.
-.Input(2, 1-sw-12, 1, 0, 0, 3, 500, 0xfff0, 0xfff8)
+# Using a non-existent switch (8-sw-99) as the alias.
+.Input(2, 8-sw-99, 1, 0, 0, 3, 500, 0xfff0, 0xfff8)
 
 # Save Post
 .PWMChannel(1, 10000, 8)

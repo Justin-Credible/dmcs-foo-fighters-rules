@@ -28,7 +28,7 @@ I've added the following features in my version (`savepost-11.txt`):
 
 ## Utilities
 
-I built a couple of utilities that were useful when debugging my rule.
+I built a utility that was useful when debugging my rule.
 
 ### RGB Color Picker
 
@@ -42,9 +42,3 @@ To use this, you press targets to seperately increment the red, green, or blue v
 * Right inlane target: clear
 
 So if you press the left inlane switch 5 times, and the bottom sonic radio target once, you'll get a nice amber color which is `rgb(50,10,0)`.
-
-### Phanom Switch Debugger
-
-I had an issue with rule firing when it shouldn't have. I built `utility-02.txt` to help in triaging the issue. The rule itself contains a write up of the issue and reproduction steps. It should be used with configuration from `config-debug.txt`.
-
-A workaround is also listed in the rule and is noted again my configuration `config-0.txt`.
